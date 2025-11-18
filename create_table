@@ -1,0 +1,98 @@
+CREATE TABLE documento (
+    id_documento INT PRIMARY KEY,
+    cpf VARCHAR(20) UNIQUE
+);
+
+CREATE TABLE endereco (
+    id_endereco INT PRIMARY KEY,
+    rua VARCHAR(120),
+    numero INT,
+    bairro VARCHAR(80),
+    cidade VARCHAR(80),
+    estado VARCHAR(30),
+    complemento VARCHAR(120)
+);
+
+CREATE TABLE telefone (
+    id_telefone INT PRIMARY KEY,
+    numero VARCHAR(20),
+    id_cliente INT,
+    id_funcionario INT,
+    id_fornecedor INT
+);
+
+CREATE TABLE clientes (
+    id_cliente INT PRIMARY KEY,
+    id_endereco INT,
+    id_telefone INT,
+    id_documento INT,
+    nome VARCHAR(80),
+    sobrenome VARCHAR(80),
+    data_de_nascimento DATE
+);
+
+CREATE TABLE funcionarios (
+    id_funcionario INT PRIMARY KEY,
+    nome VARCHAR(80),
+    sobrenome VARCHAR(80),
+    id_endereco INT,
+    id_documento INT
+);
+
+CREATE TABLE fornecedor (
+    id_fornecedor INT PRIMARY KEY,
+    cnpj VARCHAR(30),
+    nome_fantasia VARCHAR(120),
+    id_endereco INT,
+    id_telefone INT
+);
+
+CREATE TABLE produto (
+    id_produto INT PRIMARY KEY,
+    id_fornecedor INT,
+    nome_do_produto VARCHAR(120),
+    preco_de_venda DECIMAL(10,2),
+    preco_de_compra DECIMAL(10,2),
+    categoria VARCHAR(80)
+);
+
+CREATE TABLE movimentacao_estoque (
+    id_movimentacao INT PRIMARY KEY,
+    id_produto INT,
+    data_movimentacao DATE,
+    tipo VARCHAR(20),
+    quantidade INT,
+    id_fornecedor INT
+);
+
+CREATE TABLE forma_de_pagamento (
+    id_forma_de_pagamento INT PRIMARY KEY
+);
+
+CREATE TABLE evento (
+    id_evento INT PRIMARY KEY,
+    desconto_aplicado DECIMAL(10,2),
+    data_da_oferta DATE
+);
+
+CREATE TABLE controle_venda (
+    id_pedido INT PRIMARY KEY,
+    id_cliente INT,
+    id_forma_de_pagamento INT,
+    id_evento INT,
+    id_funcionario INT
+);
+
+CREATE TABLE item_venda (
+    id_item_venda INT PRIMARY KEY,
+    id_venda INT,
+    id_produto INT,
+    quantidade INT,
+    valor_unitario DECIMAL(10,2)
+);
+CREATE TABLE entrega (
+    id_entrega INT PRIMARY KEY,
+    id_endereco INT,
+    id_venda INT,
+    data_entrega DATE
+);
