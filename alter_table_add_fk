@@ -1,0 +1,47 @@
+-- Telefone
+ALTER TABLE telefone
+ADD CONSTRAINT fk_telefone_cliente FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+ADD CONSTRAINT fk_telefone_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionarios(id_funcionario),
+ADD CONSTRAINT fk_telefone_fornecedor FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id_fornecedor);
+
+-- Clientes
+ALTER TABLE clientes
+ADD CONSTRAINT fk_cliente_endereco FOREIGN KEY (id_endereco) REFERENCES endereco(id_endereco),
+ADD CONSTRAINT fk_cliente_telefone FOREIGN KEY (id_telefone) REFERENCES telefone(id_telefone),
+ADD CONSTRAINT fk_cliente_documento FOREIGN KEY (id_documento) REFERENCES documento(id_documento);
+
+-- Funcionarios
+ALTER TABLE funcionarios
+ADD CONSTRAINT fk_func_endereco FOREIGN KEY (id_endereco) REFERENCES endereco(id_endereco),
+ADD CONSTRAINT fk_func_documento FOREIGN KEY (id_documento) REFERENCES documento(id_documento);
+
+-- Fornecedor
+ALTER TABLE fornecedor
+ADD CONSTRAINT fk_fornecedor_endereco FOREIGN KEY (id_endereco) REFERENCES endereco(id_endereco),
+ADD CONSTRAINT fk_fornecedor_telefone FOREIGN KEY (id_telefone) REFERENCES telefone(id_telefone);
+
+-- Produto
+ALTER TABLE produto
+ADD CONSTRAINT fk_produto_fornecedor FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id_fornecedor);
+
+-- Movimentação de estoque
+ALTER TABLE movimentacao_estoque
+ADD CONSTRAINT fk_mov_prod FOREIGN KEY (id_produto) REFERENCES produto(id_produto),
+ADD CONSTRAINT fk_mov_fornecedor FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id_fornecedor);
+
+-- Controle venda
+ALTER TABLE controle_venda
+ADD CONSTRAINT fk_venda_cliente FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+ADD CONSTRAINT fk_venda_pagamento FOREIGN KEY (id_forma_de_pagamento) REFERENCES forma_de_pagamento(id_forma_de_pagamento),
+ADD CONSTRAINT fk_venda_evento FOREIGN KEY (id_evento) REFERENCES evento(id_evento),
+ADD CONSTRAINT fk_venda_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionarios(id_funcionario);
+
+-- Item venda
+ALTER TABLE item_venda
+ADD CONSTRAINT fk_item_venda_pedido FOREIGN KEY (id_venda) REFERENCES controle_venda(id_pedido),
+ADD CONSTRAINT fk_item_venda_prod FOREIGN KEY (id_produto) REFERENCES produto(id_produto);
+
+-- Entrega
+ALTER TABLE entrega
+ADD CONSTRAINT fk_entrega_endereco FOREIGN KEY (id_endereco) REFERENCES endereco(id_endereco),
+ADD CONSTRAINT fk_entrega_venda FOREIGN KEY (id_venda) REFERENCES controle_venda(id_pedido);
