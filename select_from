@@ -1,0 +1,29 @@
+===Listar todos os produtos da floricultura com preço de venda ordenado do menor para o maior===
+
+SELECT 
+    id_produto,
+    nome_do_produto,
+    categoria,
+    preco_de_venda
+FROM produto
+ORDER BY preco_de_venda ASC;
+
+===Mostrar clientes que já realizaram pedidos===
+
+SELECT 
+    c.id_cliente,
+    c.nome,
+    c.sobrenome,
+    cv.id_pedido,
+    cv.id_forma_de_pagamento
+FROM clientes c
+JOIN controle_venda cv ON c.id_cliente = cv.id_cliente;
+
+===Mostrar produtos cadastrados por categoria===
+
+SELECT 
+    categoria,
+    COUNT(*) AS quantidade_itens
+FROM produto
+GROUP BY categoria
+ORDER BY quantidade_itens DESC;
