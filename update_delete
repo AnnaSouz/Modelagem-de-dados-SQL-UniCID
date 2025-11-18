@@ -1,0 +1,27 @@
+===Atualizar o preço de venda de um produto===
+UPDATE produto
+SET preco_de_venda = 14.00
+WHERE id_produto = 1;
+
+===Atualizar o endereço de entrega de um pedido===
+UPDATE entrega
+SET id_endereco = 2
+WHERE id_entrega = 1;
+
+===Atualizar nome fantasia do fornecedor===
+UPDATE fornecedor
+SET nome_fantasia = 'Viveiro Flores & Verde'
+WHERE id_fornecedor = 1;
+
+===Apagar um item de venda específico===
+DELETE FROM item_venda
+WHERE id_item_venda = 3;
+
+===Remover uma movimentação de estoque incorreta===
+DELETE FROM movimentacao_estoque
+WHERE id_movimentacao = 4;
+
+===Deletar um evento promocional que não será mais utilizado===
+
+DELETE FROM evento
+WHERE id_evento = 2;
